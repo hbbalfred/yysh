@@ -67,7 +67,7 @@ var AxeGangGame = {
 	getPositions:function(){
 		return [
 			{coords:{longitude:121.47004, latitude:31.23136}},
-			{coords:{longitude:121.48004, latitude:31.2536}},
+			{coords:{longitude:121.48004, latitude:31.25136}},
 			{coords:{longitude:121.50004, latitude:31.26136}},
 			{coords:{longitude:121.52004, latitude:31.30136}},
 			{coords:{longitude:121.47004, latitude:31.24136}},
@@ -79,6 +79,32 @@ var AxeGangGame = {
 			{coords:{longitude:121.47004, latitude:31.23136}},
 		];
 		return this._positions;
+	},
+	/**
+	 * upload positions to server
+	 */
+	uploadPositions:function(){
+		var self = this;
+		
+		var data = this._positions;
+		
+		Ext.Ajax.request({
+			url: ''
+			method: 'POST',
+			params:{
+				'data-field': data
+			},
+			callback: function (option,success,response) {
+				if(success){
+					var text = response.responseText;
+					// could parse text in html format
+					AxeGangUI.setActiveItem( AxeGangUI.map );
+					AxeGangUI.game.down('#diary').update(text);
+				}else{
+					alert('oops upload fail');
+				}
+			}
+		});
 	},
 }; 
 
@@ -129,8 +155,9 @@ AxeGangUI.yysh = Ext.extend(Ext.Container, {
 				},
 				{
 					xtype:'component',
-					id:'testMsg',
+					id:'diary',
 					html:'placeholder',
+					height:'100%',
 				}
 			]
         });

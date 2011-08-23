@@ -18,7 +18,6 @@ var AxeGangGame = {
 		
 		var onSuccess = function(position){
 				console.log('new position(lat='+position.coords.latitude+', lng='+position.coords.longitude+')');
-				AxeGangUI.game.down('#testMsg').update('new position(lat='+position.coords.latitude+', lng='+position.coords.longitude+')');
 				if(currLat === position.coords.latitude
 				|| currLng === position.coords.longitude){
 					return;

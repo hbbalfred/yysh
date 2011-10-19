@@ -88,7 +88,7 @@ var AxeGangGame = {
 		var data = this._positions;
 		
 		Ext.Ajax.request({
-			url: ''
+			url: '',
 			method: 'POST',
 			params:{
 				'data-field': data
